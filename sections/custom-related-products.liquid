@@ -1,0 +1,35 @@
+<script type="text/javascript" src="{{ 'custom-related-products.js' | asset_url }}" defer></script>
+{{ 'custom-related-products.css' | asset_url | stylesheet_tag: preload: true }}
+
+{% if section.settings.heading != blank %}
+    <h2 class="section-heading h2">
+        {{ section.settings.heading }}
+    </h2>
+{% endif %}
+
+<div class="section-products" data-product-id={{ product.id }} data-product-limit="{{ section.settings.products_to_show }}" data-money-format="{{ shop.money_with_currency_format }}">
+</div>
+
+{% schema %}
+{
+    "name": "Custom related products",
+    "class": "custom-related-products",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "default": "You may also like",
+            "label": "Heading"
+        },
+        {
+            "type": "range",
+            "id": "products_to_show",
+            "min": 2,
+            "max": 10,
+            "step": 1,
+            "default": 4,
+            "label": "Maximum products to show"
+        }
+    ]
+}
+{% endschema %}
